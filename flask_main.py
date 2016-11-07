@@ -125,7 +125,6 @@ def humanize_arrow_date( date ):
         tomorrow = now.replace(days=+1)                           #cases for rounding humanized dates
         yesterday = now.replace(days=-1)   
         
-        print("Then is " + str(then) + " Now is " + str(now))
         if then.date() == now.date():
             human = "Today"
         elif then.date() == tomorrow.date():
