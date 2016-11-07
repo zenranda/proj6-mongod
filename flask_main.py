@@ -141,6 +141,24 @@ def humanize_arrow_date( date ):
         human = date
     return human
 
+############
+#
+# Functions for testing purposes
+#
+############
+
+def add_memo(db, mem):
+   """
+   Adds a memo to our collection
+   """
+    db.insert(mem)
+
+def remove_memo(db, txt):
+   """
+   Removes a memo containing the text
+   """
+   db.remove( { "text" : txt } ) 
+
 
 #############
 #
@@ -157,7 +175,7 @@ def get_memos():
         record['date'] = arrow.get(record['date']).isoformat()
         del record['_id']
         records.append(record)
-    return sorted(records, key=lambda entry : entry['date']) 
+    return sorted(records, key=lambda entry : entry['date'])   #sorts by date
 
 
 if __name__ == "__main__":
