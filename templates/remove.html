@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
-<title>Memos</title>
+<title>Removal</title>
 
   <!-- 'viewport' is used by bootstrap to respond to device size -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,49 +25,18 @@
 <body>
 <div class="container">
 
-<!-- Flashed messages before content -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
 <form action = "index" method = "post">
-<h2>Add/remove memo:</h2>
-<input type = "radio" name="options" id="add" value = "Add" checked>Add </input>
-<input type = "radio" name="options" id="remove" value = "Remove">Remove </input>
-<br>
-Memo date:
-<input type="text" name ="memoDate", value="2017/01/01"><br>
+<h1>Delete memo:</h1> <br>
 Memo text:
 <input type="text" name ="memoMake"><br>
 <input type="submit" value = "Submit">
 </form>
 
+<br>
 
-<h1>Memos</h1>
+<a href="templates/index.html">Go back to main memos page</a>
 
-{% if g.memos %}
-    {% for memo in g.memos %}
-  <div class="memo">
-  <div class="row">
-  <div class="col-md-2">
-    {{ memo.date | humanize }}
-  </div>
-  <div class="col-md-10">
-    {{ memo.text }}
-  </div>
-  </div> <!-- row -->
-  </div> <!-- memo -->
-  {% endfor %}
-{% else %}
-  <p>No memos for you. </p>  
-{% endif %}
-
+<br>
 </div> <!-- container -->
 </body>
 </html>

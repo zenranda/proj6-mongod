@@ -25,7 +25,6 @@ import logging
 import arrow    # Replacement for datetime, based on moment.js
 # import datetime # But we may still need time
 from dateutil import tz  # For interpreting local times
-import datetime
 
 # Mongo database
 from pymongo import MongoClient
@@ -64,21 +63,6 @@ except:
 ###
 
 @app.route("/")
-@app.route('/index', methods =['POST'])
-def addremove_Memo():
-    if request.form['options'] == "Add":
-   	 record = { "type" : "dated_memo",
-        	    "date" : arrow.get(request.form['memoDate'], "YYYY/M/D", tzinfo=tz.tzlocal()).naive,
-                    "text" : request.form['memoMake']}
-   	 collection.insert(record)
-    if request.form['options'] == "Remove":
-        db = request.form['memoMake']
-        collection.remove( { "text" :  db } )
-
-    return index()
-
-
-@app.route("/")
 @app.route("/index")
 def index():
   app.logger.debug("Main page entry")
@@ -88,7 +72,11 @@ def index():
   return flask.render_template('index.html')
 
 
-
+# We don't have an interface for creating memos yet
+@app.route('/index', methods=['POST'])
+def memo_make()
+    record = { "type" : "dated_memo",
+               "date" : arrow.utcnow()
 
 
 @app.errorhandler(404)
@@ -114,29 +102,14 @@ def humanize_arrow_date( date ):
     need to catch 'today' as a special case. 
     """
     try:
-        now = arrow.utcnow().to('local').replace(hour=1, minute=0, second=0, microsecond=0)
-        then = arrow.get(date)
-
-        if then.tzinfo==None:
-            then.to('local').replace(hour=1, minute=0, second=0, microsecond=0, tzinfo=tz.tzlocal())
-        else:
-            then.replace(hour=1,minute=0, second=0, microsecond=0)
-
-        tomorrow = now.replace(days=+1)
-        yesterday = now.replace(days=-1)
-        
-        print("Then is " + str(then) + " Now is " + str(now))
+        then = arrow.get(date).to('local')
+        now = arrow.utcnow().to('local')
         if then.date() == now.date():
             human = "Today"
-        elif then.date() == tomorrow.date():
-            human = "Tomorrow"
-        elif then.date() == yesterday.date():
-            human = "Yesterday"
-        else:
+        else: 
             human = then.humanize(now)
             if human == "in a day":
                 human = "Tomorrow"
-
     except: 
         human = date
     return human
@@ -157,7 +130,7 @@ def get_memos():
         record['date'] = arrow.get(record['date']).isoformat()
         del record['_id']
         records.append(record)
-    return sorted(records, key=lambda entry : entry['date']) 
+    return records 
 
 
 if __name__ == "__main__":

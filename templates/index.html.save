@@ -36,17 +36,8 @@
   {% endif %}
 {% endwith %}
 
-<form action = "index" method = "post">
-<h2>Add/remove memo:</h2>
-<input type = "radio" name="options" id="add" value = "Add" checked>Add </input>
-<input type = "radio" name="options" id="remove" value = "Remove">Remove </input>
-<br>
-Memo date:
-<input type="text" name ="memoDate", value="2017/01/01"><br>
-Memo text:
-<input type="text" name ="memoMake"><br>
-<input type="submit" value = "Submit">
-</form>
+<form action = "post_memos" method="post>
+<input type="text name = "ne
 
 
 <h1>Memos</h1>
@@ -67,6 +58,8 @@ Memo text:
 {% else %}
   <p>No memos for you. </p>  
 {% endif %}
+
+ 
 
 </div> <!-- container -->
 </body>
