@@ -151,7 +151,7 @@ def add_memo(db, mem):
    """
    Adds a memo to our collection
    """
-    db.insert(mem)
+   db.insert(mem)
 
 def remove_memo(db, txt):
    """
