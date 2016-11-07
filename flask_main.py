@@ -114,16 +114,16 @@ def humanize_arrow_date( date ):
     need to catch 'today' as a special case. 
     """
     try:
-        now = arrow.utcnow().to('local').replace(hour=1, minute=0, second=0, microsecond=0)
+        now = arrow.utcnow().to('local').replace(hour=1, minute=0, second=0, microsecond=0) #the current date, but not time
         then = arrow.get(date)
 
         if then.tzinfo==None:
-            then.to('local').replace(hour=1, minute=0, second=0, microsecond=0, tzinfo=tz.tzlocal())
+            then.to('local').replace(hour=1, minute=0, second=0, microsecond=0, tzinfo=tz.tzlocal()) #the current date, in proper tz
         else:
-            then.replace(hour=1,minute=0, second=0, microsecond=0)
+            then.replace(hour=1,minute=0, second=0, microsecond=0) #if the tz was read as local (from html form)
 
-        tomorrow = now.replace(days=+1)
-        yesterday = now.replace(days=-1)
+        tomorrow = now.replace(days=+1)                           #cases for rounding humanized dates
+        yesterday = now.replace(days=-1)   
         
         print("Then is " + str(then) + " Now is " + str(now))
         if then.date() == now.date():
