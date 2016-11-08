@@ -28,12 +28,18 @@ except:
 
     
 def test_dates():
-    assert(flask_main.humanize_arrow_date(arrow.utcnow().naive) == "Today") 
-    assert(flask_main.humanize_arrow_date(arrow.utcnow().replace(days=+7).naive) == "in 7 days")
-    assert(flask_main.humanize_arrow_date(arrow.utcnow().replace(years=+1).naive) == "in a year")
-    assert(flask_main.humanize_arrow_date(arrow.utcnow().replace(days=-1, hours=+4, minutes=+49).naive) == 'Yesterday')
+    """
+    Tests if the datetimes are humanized correctly
+    """
+    assert(flask_main.humanize_arrow_date(arrow.utcnow().to('local').naive) == "Today") 
+    assert(flask_main.humanize_arrow_date(arrow.utcnow().to('local').replace(days=+7).naive) == "in 7 days")
+    assert(flask_main.humanize_arrow_date(arrow.utcnow().to('local').replace(years=+1).naive) == "in a year")
+    assert(flask_main.humanize_arrow_date(arrow.utcnow().to('local').replace(days=-1).naive) == 'Yesterday')
 
 def test_insertion_and_removal():
+    """
+    Tests if the db can be added to or removed from, as well as size
+    """
     flask_main.add_memo(collection, {"type" : "dated_memo", "date" : arrow.utcnow().naive, "text" : "The first entry." })
     flask_main.add_memo(collection, {"type" : "dated_memo", "date" : arrow.utcnow().replace(days=+19).naive, "text" : "The second entry." })
     flask_main.add_memo(collection, {"type" : "dated_memo", "date" : arrow.utcnow().replace(days=+1, minutes=+9).naive, "text" : "The third and final entry." })
@@ -47,3 +53,8 @@ def test_insertion_and_removal():
     flask_main.remove_memo(collection, "The third and final entry.")
     flask_main.remove_memo(collection, "The fourth and seriously final entry.")
     assert(collection.count() == base_size)
+
+    
+    
+    
+    
