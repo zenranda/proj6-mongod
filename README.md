@@ -17,7 +17,7 @@ Execute the following commands
 ```
 git clone https://github.com/zenranda/proj6-mongod InstallDirectory
 cd InstallDirectory
-make configure
+. configure
 . env/bin/activate
 python3 create_db.py
 make run
