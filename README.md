@@ -1,54 +1,28 @@
-# proj6-mongo
-Simple list of dated memos kept in MongoDB database
+# README #
 
-## What is here
+###CS322 Project 6: Mongo Database###
+###Author: Marc Leppold###
 
-A simple Flask app that displays all the dated memos it finds in a MongoDB database.
-There is also a 'scaffolding' program, db_trial.py, for inserting a couple records into the database 
-and printing them out.  Get db_trial.py working before you try making your flask app work. 
+##Project Notes
 
-## What is not here
+The sixth project in CS322. A simple MongoDB database that displays text memos sorted by date. Users can input their own memos with custom text and a custom date into a form, which will be sent to the database and displayed accordingly after pressing 'submit'. Users can delete memos in the same process: by entering the text of the memo you want to delete into the field and toggling the 'remove' radio button.
 
-In addition to the missing functionality in the application, you will
-need a MongoDB database, and you will need credentials (user name and
-password) both for an administrative user and a regular user.  The
-administrative user may be you, but the regular user is your
-application. Make a subdirectory called "secrets" and place two files
-in it: 
+Requires admin/user credentials to create and access the database - the admin credentials must be supplied by the user, the user credentials are provided with certain releases of this program but must be supplied by the user otherwise.
 
-- secrets/admin_secrets.py holds configuration information for your MongoDB
-  database, including the administrative password.  
-= secrets/client_secrets.py holds configuration information for your
-  application. 
+### USAGE ###
 
+Execute the following commands
+```
+git clone https://github.com/zenranda/proj6-mongod InstallDirectory
+cd InstallDirectory
+make configure
+make run
+```
+where InstallDirectory is the directory you cloned the files to.
 
-
-## Functionality you'll add
-
-The user should be able to add dated memos, either from the same index page or from a separate page. 
-Memos should be displayed in date order. 
-The user should be able to delete memos. 
-
-## Setting up
-
-Our use of the database is pretty simple, but you should anticipate
-that installing MongoDB could take some time.  Since you may not be
-able to install the same version of MongoDB on your development
-computer and your Pi, it will be especially important to test your
-project on the Pi. 
-
-The version of MongoDB available for installing on Raspberry Pi with
-apt-get is 2.4.  The version you can find for your development
-computer is probably 3.x.  You may even have difficulty finding
-documentation for 2.4, as it is considered obsolete.  However,
-commands that work for 2.4 still seem to work for 3.x, so you should
-write your application and support scripts to use 2.4.   The
-difference that may cause you the most headaches is in creating
-database user accounts (which are different than the Unix accounts for
-users). 
-
-In Python, the pymongo API works with both versions of MongoDB, so
-it's only the initial setup where you have to be  
-careful to use the right version-specific commands. 
-
-
+After you've ran it, enter
+```
+HOST:PORT/index
+```
+into an internet browser, where HOST is the host IP of the computer the program is running on and PORT is the port it's configured to (default 5000).
+Please note that this program requires a constant internet connection in order to recieve and send database info.
