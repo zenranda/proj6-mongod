@@ -22,7 +22,7 @@ cd InstallDirectory
 python3 create_db.py
 make run
 ```
-where InstallDirectory is the directory you cloned the files to. Running create_db makes a database matching the specs in the user config file and with the admin credentials, it's required in order this project to run.
+where InstallDirectory is the directory you cloned the files to. Running create_db makes a database matching the specs in the user config file and with the admin credentials, it's required in order for this project to run.
 
 While it's running, enter
 ```
